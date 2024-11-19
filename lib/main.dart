@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'English Premier League',
-      initialRoute: '/bottomnav',
+      initialRoute: '/login',
       getPages: [
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/bottomnav', page: () => const BottomNav()),
