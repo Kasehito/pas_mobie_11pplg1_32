@@ -273,14 +273,4 @@ class TeamModel {
     data['isFavorite'] = this.isFavorite;
     return data;
   }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'strTeam': strTeam,
-      'strTeamBadge': strBadge,
-      'strDescriptionEN': strDescriptionEN,
-      'isFavorite': isFavorite,
-    };
-  }
 }

@@ -27,10 +27,12 @@ class HomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               final team = teamController.teamList[index];
               return TeamCard(
-                team: team,
+                strTeam: team.strTeam ?? 'Unknown Team',
+                strBadge: team.strBadge ?? '',
                 onTap: () {
                   Get.to(() => DetailPage(team: team));
                 },
+                onPressed: () {},
               );
             },
           );

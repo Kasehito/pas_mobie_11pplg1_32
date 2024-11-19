@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../controller/database_controller.dart';
-import '../model/team_model.dart';
 
 class MyCard extends StatelessWidget {
   final Widget? child;
@@ -46,14 +43,16 @@ class MyCard extends StatelessWidget {
 }
 
 class TeamCard extends StatelessWidget {
-  final TeamModel team;
+  final String strTeam;
+  final String strBadge;
   final VoidCallback onTap;
-  final DatabaseController controller = Get.find();
+  final VoidCallback onPressed;
 
-  TeamCard({
-    super.key,
-    required this.team,
+  const TeamCard({
+    required this.strTeam,
+    required this.strBadge,
     required this.onTap,
+    required this.onPressed,
   });
 
   @override
@@ -63,13 +62,13 @@ class TeamCard extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          if (team.strBadge?.isNotEmpty ?? false)
+          if (strBadge.isNotEmpty)
             Container(
               width: 80,
               height: 80,
               padding: const EdgeInsets.all(8),
               child: Image.network(
-                team.strBadge!,
+                strBadge,
                 errorBuilder: (context, error, stackTrace) {
                   return const Icon(Icons.sports_soccer,
                       size: 40, color: Colors.grey);
@@ -85,7 +84,7 @@ class TeamCard extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: Text(
-              team.strTeam ?? '',
+              strTeam,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -93,11 +92,8 @@ class TeamCard extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(
-              team.isFavorite == 1 ? Icons.favorite : Icons.favorite_border,
-              color: team.isFavorite == 1 ? Colors.red : null,
-            ),
-            onPressed: () => controller.toggleFavorite(team),
+            onPressed: onPressed,
+            icon: const Icon(Icons.favorite),
           ),
         ],
       ),
